@@ -5,6 +5,9 @@
 *.key
 *.pem
 *.pub
+CLIENT/wg/keys/
+SERVER/wg/keys/
+
 
 # -----------------------------
 # Logs
@@ -23,6 +26,7 @@ logs/*
 *.pcapng
 pcaps/*
 **/pcaps/*
+SNIFFER/pcaps/
 
 # -----------------------------
 # Python
@@ -44,7 +48,8 @@ __pycache__/
 *.vbox
 *.vbox-prev
 *.vdi
-*.ova
+*.vmdk
+
 
 # -----------------------------
 # OS Junk (macOS, Windows)
@@ -59,3 +64,8 @@ desktop.ini
 *.tmp
 *.bak
 *.old
+
+# Editor cruft
+*.swp
+.idea/
+.vscode/
