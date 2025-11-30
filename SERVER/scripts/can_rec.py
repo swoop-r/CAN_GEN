@@ -19,7 +19,7 @@ print("Forwarder running...")
 
 while True:
     packet, addr = recv_sock.recvfrom(128)
-    print(f"From {addr[0]}:{addr[1]}  ->  {data.hex()}")
+    print(f"From {addr[0]}:{addr[1]}  ->  {packet.hex()}")
     
     if FORWARD:
         try:
