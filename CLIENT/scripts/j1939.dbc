@@ -5,6 +5,9 @@ BS_ :
 
 BU_: Vector__XXX
 
+# Declare that this message uses 29-bit extended CAN IDs
+BA_ "CAN_EXTENDED" BO_ 61444;
+
 BO_ 61444 EEC1: 8 Vector__XXX
  SG_ EngineSpeed : 0|16@1+ (0.125,0) [0|8000] "rpm" Vector__XXX
  SG_ ActualEnginePercentTorque : 16|8@1+ (1,0) [0|100] "%" Vector__XXX
