@@ -1,0 +1,5 @@
+sudo ip addr add 192.168.100.3/24 brd 192.168.100.255 dev eth0
+sudo ip link set eth0 up
+sudo ip route add default via 192.168.100.1
+#uncomment to add full network access via DNS
+#echo "nameserver 192.168.100.1" | sudo tee /etc/resolv.conf
