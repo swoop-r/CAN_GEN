@@ -1,0 +1,8 @@
+VERSION ""
+NS_ :
+BS_:
+BU_: Vector__XXX
+
+BO_ 61444 EEC1: 8 Vector__XXX
+ SG_ EngineSpeed : 0|16@1+ (1,0) [400|2850] "rpm" Vector__XXX
+ SG_ ActualEnginePercentTorque : 16|8@1+ (1,0) [0|100] "%" Vector__XXX
