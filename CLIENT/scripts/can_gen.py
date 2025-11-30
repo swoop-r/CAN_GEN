@@ -1,33 +1,66 @@
-#script to generate a J1939-Compliant CAN Frame
-#and then forward the frame across the network
-#to the host, defined in the SERVER_IP and SERVER_PORT
+# script to generate a J1939-Compliant CAN Frame
+# and then forward the frame across the network
+# to the host, defined in the SERVER_IP and SERVER_PORT
 
 import cantools
+import os
 import socket
 import time
 import random
 
-db = cantools.database.load_file("j1939.dbc")
+DBC_PATH = os.path.join(os.path.dirname(__file__), "j1939.dbc")
+db = cantools.database.load_file(DBC_PATH)
 
 
 
-#config for local Server
-SERVER_IP = "192.168.100.1"
+# config for local Server
+SERVER_IP = "192.168.10.194"
 SERVER_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
-# example PGN 61444
-msg = db.get_message_by_name("EEC1")
+# Dated J1939 source suggests GPM13 for Parameter Group Number (PGN)
+# for engine controls. more information available: 
+msg = db.get_message_by_name("GPM13")
+
+# baseline values on init
+rpm = 800.0
+torque = 0.0
+speed = 0
+
+# simple function to change values
+# more uniformly, less pure random
+# uses random.uniform()
+def changeValues(value, min, max, step):
+    value += random.uniform(-step, step)
+
+    #maintain the expected bounds
+    if value < min:
+        value = min
+    if value > max:
+        value = max
+    
+    return value
 
 while True:
-    rpm = random.uniform(400, 2850)
-    torque = random.randint(0, 100)
+    # modulate rpm from idle to 2850
+    rpm = changeValues(rpm, 400, 2850, 50)
     
+    # change torque with realistic small steps
+    torque = changeValues(torque, -50, 100, 3)
+    
+    speed = changeValues(speed, 0, 120, 1)
+
     data = msg.encode({
         "EngineSpeed": rpm,
-        "ActualEnginePercentTorque": torque
+        "ActualEngine_PercentTorque": torque,
+        "VehicleSpeed" : speed,
+        "EngineTorqueMode" : 1,
+        "PercentLoadAtCurrentSpeed" : random.randint(20, 80),
+        "DriversDemandEngine_PercentTorque" : random.randint( -20, 50),
+        "EngineRunning" : 1,
+        "EngineControlAllowed" : 1
     })
 
 
@@ -36,7 +69,7 @@ while True:
     frame_id = msg.frame_id | 0x80000000  # OR with 0x80000000 to mark extended
     frame = frame_id.to_bytes(4, 'big') + data
     sock.sendto(frame, (SERVER_IP, SERVER_PORT))
-    print("Sent frame:" , rpm, torque)
+    print("Sent frame (frame sample rpm/torque/speed):" , rpm, torque, speed)
 
-
+    # Mimics the 100hz refresh rate of J1939
     time.sleep(0.1)

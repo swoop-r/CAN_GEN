@@ -5,6 +5,12 @@ BS_ :
 
 BU_: Vector__XXX
 
-BO_ 2365480958 EEC1: 8 Vector__XXX
- SG_ EngineSpeed : 0|16@1+ (0.125,0) [0|8000] "rpm" Vector__XXX
- SG_ ActualEnginePercentTorque : 16|8@1+ (1,0) [0|100] "%" Vector__XXX
+BO_ 2365480958 GPM13: 8 Vector__XXX
+ SG_ EngineTorqueMode : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VehicleSpeed : 48|16@1+ (0.00390625,0) [0|250.996] "km/hr" Vector__XXX
+ SG_ PercentLoadAtCurrentSpeed : 40|8@1+ (1,0) [0|125] "%" Vector__XXX
+ SG_ EngineSpeed : 24|16@1+ (0.125,0) [0|8031.88] "rpm" Vector__XXX
+ SG_ ActualEngine_PercentTorque : 16|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ DriversDemandEngine_PercentTorque : 8|8@1+ (1,-125) [-125|125] "%" Vector__XXX
+ SG_ EngineRunning : 6|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineControlAllowed : 4|2@1+ (1,0) [0|1] "" Vector__XXX
