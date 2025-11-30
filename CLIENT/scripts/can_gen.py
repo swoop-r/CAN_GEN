@@ -7,7 +7,8 @@ import socket
 import time
 import random
 
-db = cantools.database.load_file("j1939.dbc")
+db = cantools.database.load_file("j1939.dbc", encoding='utf-8', strict=False)
+
 
 
 #config for local Server
