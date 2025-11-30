@@ -7,7 +7,7 @@ import socket
 import time
 import random
 
-db = cantools.database.load_file("j1939.dbc", encoding='utf-8', strict=False)
+db = cantools.database.load_file("j1939.dbc")
 
 
 
@@ -33,8 +33,8 @@ while True:
 
     # 29-bit J1939 ID
 
-    frame = msg.frame_id.to_bytes(4, 'big') + data
-
+    frame_id = msg.frame_id | 0x80000000  # OR with 0x80000000 to mark extended
+    frame = frame_id.to_bytes(4, 'big') + data
     sock.sendto(frame, (SERVER_IP, SERVER_PORT))
     print("Sent frame:" , rpm, torque)
 
