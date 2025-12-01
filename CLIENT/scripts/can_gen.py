@@ -54,6 +54,9 @@ while True:
     
     speed = changeValues(speed, 0, 120, 1)
 
+    # encoding the data according to the DBC
+    # if the names do not match, it will error out
+    # check DBC file to ensure correct signal names
     data = msg.encode({
         "EngineSpeed": rpm,
         "ActualEngine_PercentTorque": torque,
@@ -69,6 +72,7 @@ while True:
     # 29-bit J1939 ID
 
     frame_id = msg.frame_id | 0x80000000  # OR with 0x80000000 to mark extended
+    # constructing a new frame with ID (converted to bytes) and appending data
     frame = frame_id.to_bytes(4, 'big') + data
     sock.sendto(frame, (SERVER_IP, SERVER_PORT))
     print("Sent frame (frame sample rpm/torque/speed):" , rpm, torque, speed)
