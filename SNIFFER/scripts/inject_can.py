@@ -16,7 +16,7 @@ sock.bind(("0.0.0.0", UDP_PORT))
 bus = can.interface.Bus(channel='vcan0', bustype='socketcan')
 
 
-print("LIstening... injecting to vcan0")
+print("Listening... injecting to vcan0")
 
 while True:
     pkt, _ = sock.recvfrom(64)

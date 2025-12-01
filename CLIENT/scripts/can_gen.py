@@ -8,6 +8,8 @@ import socket
 import time
 import random
 
+# load the DBC file with path relative to this script
+# assumes the DBC file is in the same directory
 DBC_PATH = os.path.join(os.path.dirname(__file__), "j1939.dbc")
 db = cantools.database.load_file(DBC_PATH)
 
@@ -20,8 +22,8 @@ SERVER_PORT = 5005
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 
-# Dated J1939 source suggests GPM13 for Parameter Group Number (PGN)
-# for engine controls. more information available: 
+# Dated J1939 source from Tom Hawkins suggests GPM13 for Parameter Group Number (PGN)
+# for engine controls. more information available: https://www.csselectronics.com/pages/j1939-explained-simple-intro-tutorial#j1939-pgn-spn 
 msg = db.get_message_by_name("GPM13")
 
 # baseline values on init

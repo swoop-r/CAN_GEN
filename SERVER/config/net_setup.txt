@@ -31,6 +31,7 @@ Internet: via
 192.168.10.255 via 192.168.10.194
 192.168.100/24 via 192.168.100.1
 192.168.100.1 via 08:00:27:0f:21:59
+192.168.100.10 via 08:00:27:7e:93:83
 192.168.100.255 via 192.168.100.1
  via
 Internet6: via
@@ -44,7 +45,7 @@ Internet6: via
 fe80::/10 via ::1
 fec0::/10 via ::1
 fe80::1%lo0 via fe80::1%lo0
-ff01::/16 via ::1
-ff01::%lo0/32 via fe80::1%lo0
-ff02::/16 via ::1
-ff02::%lo0/32 via fe80::1%lo0
+ff01::/16 via ::1                                                                         
+ff01::%lo0/32 via fe80::1%lo0                                                             
+ff02::/16 via ::1                                                                         
+ff02::%lo0/32 via fe80::1%lo0   
